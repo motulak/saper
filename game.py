@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import random
+
 EMPTY = "?"
 BOMB = "*"
 
@@ -30,15 +32,13 @@ class Board(object):
         self.board[x][y] = BOMB
 
     def count_sourondings_bombs(self,x,y):
-        print "do it for",x,y
+
         bom = 0
         for a in range(x-1,x+2):
             if a-1 >= -1 and a < self.size:
                 for b in range(y-1,y+2):
                     if b - 1 >= -1 and b + 1 < self.size:
-                        print "{},{} - {}".format(a,b,self.board[a][b])
                         if self.board[a][b] == BOMB:
-                            print "bomb found"
                             bom += 1
         self.board[x][y] = bom
 
@@ -48,5 +48,22 @@ class Board(object):
             for b in range(self.size):
                 if self.board[a][b] != BOMB:
                     self.count_sourondings_bombs(a,b)
+
+
+    def place_random_bomb(self,amount=1):
+        indexes = []
+        for a in range(self.size):
+            for b in range(self.size):
+                indexes.append((a,b))
+
+        for x in range(amount):
+            bomb = random.choice(indexes)
+            indexes.remove(bomb)
+            a,b = bomb
+            self.add_bomb(a,b)
+
+
+
+
 
 

@@ -4,11 +4,9 @@ from game import *
 class TestStringMethods(unittest.TestCase):
 
     def test_printing_emty_board(self):
-        board = Board(5)
+        board = Board(10)
         board.draw_board()
-        board.add_bomb(1,2)
-        board.add_bomb(1,3)
-        board.draw_board()
+        board.place_random_bomb(20)
         board.count_bobmbs_for_all()
         board.draw_board()
 
